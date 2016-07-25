@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Disappearing Ninjas</title>
+    {% load staticfiles %}
+  </head>
+  <body>
+    {% if not ninja %}
+    <h1> No ninjas here!</h1>
+    {% else %}
+      {% static ninja as myninja %}
+      <img src='{{myninja}}'>
+    {% endif %}
+
+  </body>
+</html>

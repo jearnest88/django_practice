@@ -1,0 +1,36 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+#wrapper {
+	width: 100%;
+	padding: 25px 0 5px 15px;
+}
+
+#top_row p{
+	font-size: 2em;
+}
+
+#middle_row {
+	margin: 25px 0px 50px 0px;
+}
+#farm, #cave, #house, #casino {
+	width: 22%;
+	display: inline-block;
+	text-align: center;
+	font-size: 1.5em;
+	padding: 15px 0;
+}
+ul {
+	margin-left: 50px;
+}
+
+
+button {
+	width: 120px;
+	height: 45px;
+	background-color: #FFF;
+	border-radius: 2px;
+	font-weight: bolder;
+	margin-top: 15px;
+}
