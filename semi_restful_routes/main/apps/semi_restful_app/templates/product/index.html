@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Semi-Resftul Routes</title>
+    {% load staticfiles %}
+  </head>
+  <body>
+    <h1> Products </h1>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>fggdfgdfg</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+    <form action='/product/create'>
+      {% csrf_token %}
+      <input type="submit" value="Add a new product">
+    </form>
+  </body>
+</html>
