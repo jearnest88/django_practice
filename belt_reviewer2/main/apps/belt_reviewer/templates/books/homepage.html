@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Belt Reviewer User Homepage</title>
+  </head>
+  <body>
+    <h1> Welcome, {{ request.session.name }} </h1>
+    <h2> Recent Book Reviews:</h2>
+    <table>
+      <tr>
+        <th>Title:</th>
+        <th>Author:</th>
+        <th>Review:</th>
+      </tr>
+      {% for book in books %}
+        <tr>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+    <p> Book Review 1</p>
+    <p>Book review 2</p>
+    <form action="/books/new">
+      {% csrf_token %}
+      <input type="submit" value="Add a new review">
+    </form>
+  </body>
+</html>
