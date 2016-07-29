@@ -27,17 +27,18 @@ def login(request):
         print result[1]
         request.session['user_id'] = result[1].id
         request.session['name'] = result[1].name
-        return render(request, 'books/homepage.html')
+        books = Book.objects.all()
+        reviews = Review.objects.all()
+        return render(request, 'books/homepage.html', {'books': books, 'reviews': reviews})
     else:
         messages.add_message(request, messages.ERROR, result[1])
         return redirect('/')
 
 def homepage(request):
-    books=Book.objects.all()
-    context = {
-        'books': books
-    }
-    return render(request, 'books/homepage.html', context)
+    books = Book.objects.all()
+    reviews = Review.objects.all()
+    print(books)
+    return render(request, 'books/homepage.html', {'books':books, 'reviews': reviews})
 
 def new(request):
     return render(request, 'books/add.html')
@@ -48,5 +49,7 @@ def add(request):
         if result[0] == False:
             messages.add_message(request, messages.ERROR, result[1])
             return render(request, 'books/add.html')
+        else:
+            Book.objects.create(title=request.POST['title'], author=request.POST['author'])
 
     return render(request, 'books/homepage.html')
