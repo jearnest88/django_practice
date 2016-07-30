@@ -8,10 +8,10 @@
     <h3>id: {{ id }} </h3>
     <h1>Title: {{ title }}</h1>
     <h2>Author: {{ author }}</h2>
-    {% for review in book.review_set.all %}
-      {{review.review}}
-    {% endfor %}
-    <form action='/books/add_review/{{book.id}}' method='post'>
+    <p>Review: {{review}} </p>
+    <h5>Rating: {{rating}} Star(s)</h5>
+    <form action='/books/add_review' method='post'>
+      {% csrf_token %}
       <textarea name = 'review' rows='8' cols='40'></textarea>
       <h4>
         <label for='rating'>Rating: </label>

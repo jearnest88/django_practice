@@ -12,6 +12,7 @@
       <h6> {{ book.author }} </h6>
       {% for review in book.review_set.all %}
         {{review.review}}
+        <h5>Rating: {{review.rating}} Star(s)</h5>
       {% endfor %}
       <form action='books/destroy/{{book.id}}' method='POST'>
         {% csrf_token %}

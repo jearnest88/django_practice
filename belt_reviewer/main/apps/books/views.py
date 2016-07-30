@@ -16,28 +16,33 @@ def index(request):
 def new(request):
     return render(request, 'books/add.html')
 
-#adds a new book
+#adds a new book and review for the new book
 def add_book(request):
     user = User.objects.filter(id=request.session['user_id'])
-    Book.objects.create(title=request.POST['title'], author=request.POST['author'])
-    book = Book.objects.get(title=request.POST['title'], author=request.POST['author'])
+    book = Book.objects.create(title=request.POST['title'], author=request.POST['author'])
     book.save()
-    book.id
-    Review.objects.create(review=request.POST['review'], rating=request.POST['rating'], user=user, book=book.id)
+    Review.objects.create(review=request.POST['review'], rating=request.POST['rating'], user=user[0], book=book)
     return redirect('/books')
-#show book review page for selected book
+
+#show book review page for selected book and add new review
 def show_review(request, id):
     book = Book.objects.get(id=id)
+    review = Review.objects.get(book_id=id)
+    print(review)
     context = {
     'id': book.id,
     'title': book.title,
-    'author': book.author
+    'author': book.author,
+    'review': review.review,
+    'rating': review.rating
     }
     return render(request, 'books/show_review.html', context)
+
 #left off here, need to get this to work
-def add_review(request, id):
+def add_review(request):
+    user = User.objects.filter(id=request.session['user_id'])
     book = Book.objects.get(id=id)
-    Review.objects.create(review=request.POST['review'], rating=request.POST['rating'])
+    Review.objects.create(review=request.POST['review'], rating=request.POST['rating'], user=user[0], book=book)
     return redirect('/books')
 
 #destroy a book! Have to enable in books/index.html for this to work, it is commented out

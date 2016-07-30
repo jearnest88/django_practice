@@ -1,0 +1,4 @@
+Current step:
+Get all of a books reviews/ratings to appear in the show_review.html page
+	Currently, only the selected books info appears(title, author)
+Next, I have to get the "Write a review for this book!" button to work at the bottom of that same page!
