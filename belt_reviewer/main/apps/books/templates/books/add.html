@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Belt Reviewer Add Page</title>
+  </head>
+  <body>
+    <h1>Add a New Book Title</h1>
+    <form action="/books/add" method='POST'>
+      {% csrf_token %}
+      <p>Book Title: <input type='text' name='title'></p>
+      <p>Add a new author: <input type='text' name='author'></p>
+      <input type="submit">
+    </form>
+    <form action="/books" method='POST'>
+      {% csrf_token %}
+      <input type="submit" value="Go back">
+    </form>
+    {% if messages %}
+    <ul>
+    {% for msg in messages %}
+     <li>
+       {{ msg.message }}
+     </li>
+    {% endfor %}
+    </uL>
+    {% endif %}
+  </body>
+</html>

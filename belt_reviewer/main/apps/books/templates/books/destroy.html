@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Destory Course</title>
+  </head>
+  <body>
+    <h1> Are you sure you want to delete the following book?</h1>
+    <h2>Title: {{ book.title }}</h2>
+    <h2>Author:</h2> <p>{{ book.author }}</p>
+    <form action='/books' method='GET'>
+      <input type='submit' value='No!'>
+    </form>
+    <form action='{{ book.id }}' method='POST'>
+      {% csrf_token %}
+      <input type='submit' value='Yes! I want to delete this'>
+    </form>
+  </body>
+</html>

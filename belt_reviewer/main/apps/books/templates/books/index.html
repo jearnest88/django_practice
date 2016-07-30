@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Belt Reviewer User Homepage</title>
+  </head>
+  <body>
+    <h1> Welcome, {{ request.session.name }} </h1>
+    <h2> Recent Book Reviews:</h2>
+    {% for book in books %}
+      <h5> {{ book.title }} </h5>
+      <h6> {{ book.author }} </h6>
+      <!-- <form action='books/destroy/{{book.id}}' method='POST'>
+        {% csrf_token %}
+        <input type='submit' value='Remove'>
+      </form> -->
+      <form action='books/{{book.id}}' methods='GET'>
+        {% csrf_token %}
+        <input type='submit' value='Go to review page!''>
+      </form>
+    {% endfor %}
+    <form action="/books/new">
+      {% csrf_token %}
+      <input type="submit" value="Add a new book!">
+    </form>
+  </body>
+</html>
