@@ -51,5 +51,8 @@ def add(request):
             return render(request, 'books/add.html')
         else:
             Book.objects.create(title=request.POST['title'], author=request.POST['author'])
+            book = Book.objects.last(title=title, author=author)
+            user_id = User.objects.get(id=request.session['user_id'])
+            Review.objects.create(book=book, user=user, rating=request.POST['rating'], review=request.POST['review'])
 
     return render(request, 'books/homepage.html')

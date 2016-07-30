@@ -42,7 +42,9 @@ class BookManager(models.Manager):
         if len(kwargs['title'][0]) == 0 or len(kwargs['author'][0]) == 0:
             flagger = False
             errors.append("Please fill out every field!")
-        return (flagger, errors)
+        if errors:
+            return (flagger, errors)
+
 
 class ReviewManager(models.Manager):
     def register(self, **kwargs):
@@ -53,12 +55,6 @@ class ReviewManager(models.Manager):
             errors.append("Please fill out every field!")
         if errors:
             return (flagger, errors)
-
-        else:
-            Book.objects.create(title = title, author = author)
-            book = Book.objects.get(title = title, author = author)
-            Review.objects.create(description = description, rating = rating, book_id = book_id, user_id = user_id)
-            return(True, "Successfully added a new book and a review", book.id)
 
 class User(models.Model):
     name = models.CharField(max_length=100)
@@ -81,7 +77,7 @@ class Book(models.Model):
 class Review(models.Model):
     book = models.ForeignKey(Book)
     user = models.ForeignKey(User)
-    rating = models.IntegerField()
+    rating = models.IntegerField(default=0)
     review = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)

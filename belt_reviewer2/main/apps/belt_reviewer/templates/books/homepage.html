@@ -19,9 +19,13 @@
           <td>{{ book.author }}</td>
         </tr>
       {% endfor %}
+      {% for review in reviews %}
+        <tr>
+          <td> {{ review.review }}</td>
+          <td> {{ review.rating }}</td>
+        </tr>
+      {% endfor %}
     </table>
-    <p> Book Review 1</p>
-    <p>Book review 2</p>
     <form action="/books/new">
       {% csrf_token %}
       <input type="submit" value="Add a new review">
