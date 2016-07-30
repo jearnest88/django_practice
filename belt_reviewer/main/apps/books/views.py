@@ -18,10 +18,12 @@ def new(request):
 
 #adds a new book
 def add_book(request):
-    user = User.objects.get(id=request.session['user_id'])
+    user = User.objects.filter(id=request.session['user_id'])
     Book.objects.create(title=request.POST['title'], author=request.POST['author'])
-    book = Book.id
-    Review.objects.create(review=request.POST['review'], rating=request.POST['rating'], user=user, book=book)
+    book = Book.objects.get(title=request.POST['title'], author=request.POST['author'])
+    book.save()
+    book.id
+    Review.objects.create(review=request.POST['review'], rating=request.POST['rating'], user=user, book=book.id)
     return redirect('/books')
 #show book review page for selected book
 def show_review(request, id):
