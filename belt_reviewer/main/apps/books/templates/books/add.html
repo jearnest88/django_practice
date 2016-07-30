@@ -10,6 +10,18 @@
       {% csrf_token %}
       <p>Book Title: <input type='text' name='title'></p>
       <p>Add a new author: <input type='text' name='author'></p>
+      <h4>Write a reivew!</h4>
+      <textarea name = 'review' rows='8' cols='40'></textarea>
+      <h4>
+        <label for='rating'>Rating: </label>
+        <select id='rating' name='rating'>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select> Stars.
+      </h4>
       <input type="submit">
     </form>
     <form action="/books" method='POST'>

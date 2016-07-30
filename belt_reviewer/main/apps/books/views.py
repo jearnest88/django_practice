@@ -7,7 +7,8 @@ import bcrypt
 #main user login screen
 def index(request):
     context = {
-    "books": Book.objects.all()
+    "books": Book.objects.all(),
+    "reviews": Review.objects.all()
     }
     return render(request,'books/index.html', context)
 
@@ -17,12 +18,16 @@ def new(request):
 
 #adds a new book
 def add_book(request):
+    user = User.objects.get(id=request.session['user_id'])
     Book.objects.create(title=request.POST['title'], author=request.POST['author'])
+    book = Book.id
+    Review.objects.create(review=request.POST['review'], rating=request.POST['rating'], user=user, book=book)
     return redirect('/books')
 #show book review page for selected book
 def show_review(request, id):
     book = Book.objects.get(id=id)
     context = {
+    'id': book.id,
     'title': book.title,
     'author': book.author
     }
